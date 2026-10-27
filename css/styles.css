@@ -235,29 +235,21 @@ h1, h2 { font-family: var(--font-display); letter-spacing: -.065em; line-height:
 .art-card-label { display: block; font-size: 8px; font-weight: 700; letter-spacing: .13em; }
 .art-card-star { position: absolute; top: 57px; right: 20px; font-size: 48px; }
 .art-card-bottom { position: absolute; bottom: 21px; left: 20px; font-family: var(--font-display); font-size: 35px; font-weight: 700; line-height: .9; letter-spacing: -.08em; }
-.art-card-front { z-index: 1; overflow: hidden; padding: 20px; transform: rotate(-8deg) translate(-22px, 1px); background: var(--brand); color: var(--surface); }
+.art-card-front { z-index: 1; overflow: hidden; padding: 20px; transform: rotate(-8deg) translate(-22px, 1px); background: var(--brand); color: #fff; }
 .art-card-front:after { position: absolute; right: -40px; bottom: -65px; width: 180px; height: 180px; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; box-shadow: 0 0 0 16px rgba(255,255,255,.08), 0 0 0 32px rgba(255,255,255,.06); content: ""; }
 .art-mini-mark {
   position: relative;
   z-index: 2;
-  display: inline-flex;
-  width: fit-content;
-  padding: 2px 7px 4px 5px;
-  border: 1px solid rgba(255, 255, 255, .36);
-  border-radius: 6px;
-  background: rgba(255, 255, 255, .12);
-  box-shadow: 0 0 12px rgba(255, 255, 255, .38), 0 0 28px rgba(255, 216, 106, .62);
   font-family: var(--font-display);
   font-size: 19px;
   font-weight: 700;
   letter-spacing: -.1em;
-  text-shadow: 0 0 8px rgba(255, 255, 255, .8);
-  animation: logo-glow 2.6s ease-in-out infinite alternate;
 }
-.art-mini-mark span { color: #ffd86a; text-shadow: 0 0 7px rgba(255, 216, 106, .95), 0 0 16px rgba(255, 216, 106, .75); }
-@keyframes logo-glow {
-  from { box-shadow: 0 0 10px rgba(255, 255, 255, .3), 0 0 20px rgba(255, 216, 106, .42); }
-  to { box-shadow: 0 0 16px rgba(255, 255, 255, .56), 0 0 35px rgba(255, 216, 106, .78); }
+.art-mini-mark__glow { color: #fff; animation: logo-letter-glow 2.6s ease-in-out infinite alternate; }
+.art-mini-mark > span:last-child { color: #ffd86a; }
+@keyframes logo-letter-glow {
+  from { text-shadow: 0 0 4px rgba(255, 255, 255, .45), 0 0 8px rgba(255, 216, 106, .3); }
+  to { text-shadow: 0 0 8px rgba(255, 255, 255, .95), 0 0 17px rgba(255, 216, 106, .9); }
 }
 .art-flower { position: absolute; top: 52px; right: 22px; color: #ffd86a; font-size: 77px; line-height: 1; }
 .art-front-type { position: absolute; z-index: 2; bottom: 63px; left: 20px; font-family: var(--font-display); font-size: 35px; font-weight: 600; line-height: .97; letter-spacing: -.07em; }
@@ -530,5 +522,5 @@ h1, h2 { font-family: var(--font-display); letter-spacing: -.065em; line-height:
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
-  .whatsapp-float, .whatsapp-float::before, .art-mini-mark { animation: none; }
+  .whatsapp-float, .whatsapp-float::before, .art-mini-mark__glow { animation: none; }
 }

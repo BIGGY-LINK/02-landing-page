@@ -134,6 +134,53 @@ const initHeaderShadow = () => {
 };
 
 /**
+ * Applies the saved color theme and lets visitors switch between light and dark.
+ */
+const initThemeToggle = () => {
+  const themeToggle = document.querySelector(".theme-toggle");
+  if (!themeToggle) return;
+
+  const root = document.documentElement;
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+  const getSavedTheme = () => {
+    try {
+      return localStorage.getItem("theme");
+    } catch (error) {
+      console.error("Unable to read the saved theme from localStorage.", error);
+      return null;
+    }
+  };
+  const savedTheme = getSavedTheme();
+  const initialTheme =
+    savedTheme === "light" || savedTheme === "dark"
+      ? savedTheme
+      : window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+
+  const applyTheme = (theme) => {
+    const isDark = theme === "dark";
+    root.dataset.theme = theme;
+    themeToggle.setAttribute("aria-pressed", String(isDark));
+    themeToggle.setAttribute("aria-label", `Switch to ${isDark ? "light" : "dark"} mode`);
+    if (themeColor) themeColor.setAttribute("content", isDark ? "#17141f" : "#fffefa");
+  };
+
+  applyTheme(initialTheme);
+
+  themeToggle.addEventListener("click", () => {
+    const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+    applyTheme(nextTheme);
+
+    try {
+      localStorage.setItem("theme", nextTheme);
+    } catch (error) {
+      console.error("Unable to save the selected theme to localStorage.", error);
+    }
+  });
+};
+
+/**
  * Keeps the footer copyright year current.
  */
 const initFooterYear = () => {
@@ -255,6 +302,7 @@ const init = () => {
   initAccordion();
   initPricingToggle();
   initHeaderShadow();
+  initThemeToggle();
   initFooterYear();
   initSignupForm();
 };
